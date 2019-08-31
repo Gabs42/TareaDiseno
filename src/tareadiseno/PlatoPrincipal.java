@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tareadiseño;
+package tareadiseno;
 
 /**
  *
  * @author Gabriel
  */
-public class Bebida extends Componente {
+public class PlatoPrincipal extends Componente{
+    
+    public PlatoPrincipal(int codigo, float precio, String nombre) {
+        super(codigo, precio, nombre);
+    }
     
 }

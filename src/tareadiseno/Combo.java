@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tareadiseño;
+package tareadiseno;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Gabriel
  */
-public class Combo {
+public class Combo implements IPrototype {
     private PlatoPrincipal platoPrincipal;
     private ArrayList<Bebida> bebidas;
     private ArrayList<Adicional> adicionales;
@@ -44,6 +44,24 @@ public class Combo {
         }
         return resultado;
     }
+
+    @Override
+    public IPrototype clonar() {//metodo de clonacion que toma los contenidos del combo y los devuelve
+        ArrayList<Bebida> bebidasClone= new ArrayList<>();
+        ArrayList<Adicional> adicionalesClone = new ArrayList<>();
+        
+        for(Bebida b:this.bebidas){
+            bebidasClone.add(b);
+        }
+        
+        for(Adicional a:this.adicionales){
+            adicionalesClone.add(a);
+        }
+        
+        Combo clone = new Combo(platoPrincipal,bebidasClone,adicionalesClone);
+        return clone;
+    }
+    
     public class ComboBuilder implements IBuilder<Combo>{
         private PlatoPrincipal platoPrincipal;
         private ArrayList<Bebida> bebidas= new ArrayList<>();

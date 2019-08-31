@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tareadiseño;
+package tareadiseno;
 
 /**
  *
  * @author Gabriel
  */
-public class PlatoPrincipal extends Componente{
-    
+public interface IPrototype {
+    public IPrototype clonar();
 }
