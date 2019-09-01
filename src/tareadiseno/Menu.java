@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import tareadiseno.Combo.ComboBuilder;
 
 /**
  *
@@ -22,10 +23,10 @@ public class Menu {
     private ArrayList<Adicional> adicionales = new ArrayList<>();
     
     private Menu() throws FileNotFoundException{//abre los 3 archivos que tiene los platillos adicionales y bebidas y los inserta en las listas correspondientes
-        Scanner platillos = new Scanner(new File("platillos.txt"));
+        Scanner platillos = new Scanner(new File("platillos.txt"));//scanner que abre los 4 archivos
         ArrayList<String> list = new ArrayList<>();
         while(platillos.hasNext()){
-            list.add(platillos.next());
+            list.add(platillos.next());//se inserta en una lista los platillos,adicionales etc.
         }
         platillos.close();
         
@@ -43,9 +44,16 @@ public class Menu {
         }
         bebidas.close();
         
+        Scanner combos = new Scanner(new File("combos.txt"));
+        ArrayList<String> listCombos = new ArrayList<>();
+        while(combos.hasNext()){
+            listCombos.add(combos.next());
+        }
+        combos.close();
+        
         for(int i =0;i<list.size();i+=3){
             PlatoPrincipal p = new PlatoPrincipal(Integer.parseInt(list.get(i+2)),Float.parseFloat(list.get(i+1)),list.get(i));
-            this.platosPrincipales.add(p);
+            this.platosPrincipales.add(p);//se agregan del txt los platillos ya creados a la lista de platillos del menus
         }
         
         for(int i =0;i<listAdicionales.size();i+=3){
@@ -57,7 +65,33 @@ public class Menu {
             Bebida b = new Bebida(Integer.parseInt(listBebidas.get(i+2)),Float.parseFloat(listBebidas.get(i+1)),listBebidas.get(i));
             this.bebidas.add(b);
         }
-        System.out.println(this.bebidas.get(0).getNombre());
+        ComboBuilder comboAgregar = new ComboBuilder();//se crea un combo builder para poder agregar los combos predeterminados
+        for(int i = 0;i<listCombos.size();i++){
+            if(listCombos.get(i).compareToIgnoreCase(".")==0){//dentro del txt el . indica el final de un combo por lo que aqui se agrega al prototye para que estos puedan ser clonados
+                Combo comboPred = comboAgregar.build();
+                PrototypeFactory.anadirPrototipo("Combo "+comboPred.getPlatoPrincipal().getNombre(),comboPred);
+                comboAgregar = new ComboBuilder();
+            }
+            
+            for(PlatoPrincipal p:this.platosPrincipales){//Se agrega el plato/bebida/Adicional al combo
+                if(p.getNombre().compareToIgnoreCase(listCombos.get(i))==0){
+                    comboAgregar.setPlatoPrincipal(p).build();
+                }
+            }
+            
+            for(Bebida b:this.bebidas){
+                if(b.getNombre().compareToIgnoreCase(listCombos.get(i))==0){
+                    comboAgregar.anadirBebida(b).build();
+                }
+            }
+            
+            for(Adicional a:this.adicionales){
+                if(a.getNombre().compareToIgnoreCase(listCombos.get(i))==0){
+                    comboAgregar.anadirAdicional(a).build();
+                }
+            }
+            
+        }
     
     }
     

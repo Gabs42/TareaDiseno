@@ -46,7 +46,7 @@ public class Combo implements IPrototype {
     }
 
     @Override
-    public IPrototype clonar() {//metodo de clonacion que toma los contenidos del combo y los devuelve
+    public Combo clonar() {//metodo de clonacion que toma los contenidos del combo y los devuelve
         ArrayList<Bebida> bebidasClone= new ArrayList<>();
         ArrayList<Adicional> adicionalesClone = new ArrayList<>();
         
@@ -62,7 +62,7 @@ public class Combo implements IPrototype {
         return clone;
     }
     
-    public class ComboBuilder implements IBuilder<Combo>{
+    public static class ComboBuilder implements IBuilder<Combo>{
         private PlatoPrincipal platoPrincipal;
         private ArrayList<Bebida> bebidas= new ArrayList<>();
         private ArrayList<Adicional> adicionales = new ArrayList<>();
