@@ -8,7 +8,6 @@ package tareadiseno;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import tareadiseno.Combo.ComboBuilder;
 
@@ -93,6 +92,18 @@ public class Menu {
             
         }
     
+    }
+    
+    public ArrayList<PlatoPrincipal> getPlatosPrincipales() {
+    	return platosPrincipales;
+    }
+    
+    public ArrayList<Bebida> getBebidas() {
+    	return bebidas;
+    }
+    
+    public ArrayList<Adicional> getAdicionales() {
+    	return adicionales;
     }
     
     public static Menu obtenerMenu() throws FileNotFoundException{//llamada singleton

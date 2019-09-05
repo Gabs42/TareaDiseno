@@ -10,6 +10,7 @@ package tareadiseno;
  * @author Gabriel
  */
 public abstract class Componente {//Clase abstracta de la cual heredaran bebida,plato y adicional
+    
     private int codigo;
     private float precio;
     private String nombre;
@@ -20,7 +21,6 @@ public abstract class Componente {//Clase abstracta de la cual heredaran bebida,
         this.nombre = nombre;
     }
 
-    
     public int getCodigo() {
         return codigo;
     }
@@ -45,5 +45,8 @@ public abstract class Componente {//Clase abstracta de la cual heredaran bebida,
         this.nombre = nombre;
     }
     
+    public String toString() {
+      return nombre;
+    }
     
 }
